@@ -1,0 +1,32 @@
+
+<div *ngIf="viewMode; else editable">
+    <div *ngIf="currentAlbum.id">
+      <h4>Album</h4>
+      <div>
+        <label><strong>Title:</strong></label> {{ currentAlbum.title }}
+      </div>
+      <div>
+        <label><strong>Hash:</strong></label>
+        {{ currentAlbum.id}}
+      </div>
+      <div>
+        <label><strong>Description:</strong></label>
+        {{ currentAlbum.description}}
+      </div>
+      <div>
+        <img alt="No image" width="100" height="100" src={{currentAlbum.link}}>
+      </div>
+    </div>
+  
+    <div *ngIf="!currentAlbum">
+      <br />
+      <p>Please click on an Album...</p>
+    </div>
+  </div>
+  
+  <ng-template #editable>
+    <div *ngIf="!currentAlbum.id">
+      <br />
+      <p>Cannot access this Album...</p>
+    </div>
+  </ng-template>

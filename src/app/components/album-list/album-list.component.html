@@ -1,0 +1,74 @@
+<div class="list row">
+  <div class="col-md-8">
+    <div class="input-group mb-3">
+      <input type="text" class="form-control" placeholder="Search by title" [(ngModel)]="title" />
+      <div class="input-group-append">
+        <button class="btn btn-outline-secondary" type="button" (click)="seatchAlbumId()">
+          Search
+        </button>
+      </div>
+    </div>
+  </div>
+  <div class="col-md-6">
+    <h4>Albums List</h4>
+    <ng-template #loading>
+      <div>Please write a hash code</div>
+    </ng-template>
+    <div *ngIf="searchDone else loading">
+      <div>
+        <table class="table">
+          <thead>
+            <tr>
+              <th>Albums</th>
+              <th>Album Hash</th>
+              <th>Image</th>
+              <th>Voir</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr *ngFor="let img of imgs; let i=index">
+              <td>{{ albumSearched.title }}</td>
+              <td>{{ albumSearched.id }}</td>
+              <td> <img alt="No image" width="50" height="50" src={{img.link}}></td>
+              <td> <button (click)="setActiveAlbum(img)" class="btn btn-success"> See more</button> </td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+    </div>
+
+
+    <table class="table">
+      <thead>
+        <tr>
+          <th>Albums</th>
+          <th>Hash</th>
+          <th>Image</th>
+          <th>Voir</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr *ngFor="let album of albums; let i=index">
+          <td>{{ album.title }}</td>
+          <td>{{ album.id }}</td>
+          <td> <img alt="No image" width="25" height="25" src={{album.link}}></td>
+          <td>
+            <i class="bi bi-eye-fill list-group-item " [class.active]="i == currentIndex"
+              (click)="setActiveAlbum(album, i)"> <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16"
+                fill="currentColor" class="bi bi-eye-fill" viewBox="0 0 16 16">
+                <path d="M10.5 8a2.5 2.5 0 1 1-5 0 2.5 2.5 0 0 1 5 0z" />
+                <path d="M0 8s3-5.5 8-5.5S16 8 16 8s-3 5.5-8 5.5S0 8 0 8zm8 3.5a3.5 3.5 0 1 0 0-7 3.5 3.5 0 0 0 0 7z" />
+              </svg></i>
+          </td>
+        </tr>
+      </tbody>
+    </table>
+
+  </div>
+  <div class="col-md-6">
+    <!-- album details -->
+    <app-album-details [viewMode]="true" [currentAlbum]="currentAlbum">
+
+    </app-album-details>
+  </div>
+</div>
